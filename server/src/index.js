@@ -4,12 +4,15 @@ import mongoose from "mongoose";
 
 import { userRouter } from "./routes/users.js";
 
+import {productRouter } from "./routes/products.js";
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/auth", userRouter);
+app.use("/products",productRouter);
 
 const connectMongo = async () => {
   try {

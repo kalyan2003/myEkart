@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
     const user = await userModel.findOne({ username });
 
     if (!user) {
-      return req.json({ message: "user doesnt exist " });
+      return req.json({ message: "user doesn't exist " });
     }
 
     const isPasswordvalid = await bcrypt.compare(password, user.password);
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
       return res.json({ message: "check your usernaame or password " });
     }
 
-    const token = jwt.json({ id: user._id }, "secret");
+    const token = jwt.sign({ id: user._id }, "secret");
     res.json({ token, userID: user._id });
 
     return res.status(200).json({ message: "success" });
